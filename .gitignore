@@ -1,3 +1,8 @@
-Pompe/.idea/
+myjpaceapp/.idea/
+myjpaceapp/.classpath
+myjpaceapp/.project
+myjpaceapp/.settings/
+myjpaceapp/target/
 *.iml
 Pompe/target
+commandes.txt
