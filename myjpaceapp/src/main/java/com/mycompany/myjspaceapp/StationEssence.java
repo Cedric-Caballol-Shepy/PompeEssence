@@ -13,6 +13,13 @@ public class StationEssence {
         Object[] tuple = inbox.get(new FormalField(String.class));
         System.out.println(tuple[0]);
 
+        /// Test CodeGenerator :
+        CodeGenerator c = CodeGenerator.getInstance();
+        for(int i = 0 ; i < 100 ; i++) {
+            System.out.println("Code random :" + c.next());
+        }
+        ///
+
     }
 
 }
