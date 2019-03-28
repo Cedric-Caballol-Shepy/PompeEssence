@@ -13,10 +13,6 @@ public class StationEssence {
         Object[] tuple = inbox.get(new FormalField(String.class));
         System.out.println(tuple[0]);
 
-        Thread t1 = new Thread(new Conducteur());
-        t1.start();
-        t1.join();
-
     }
 
 }
