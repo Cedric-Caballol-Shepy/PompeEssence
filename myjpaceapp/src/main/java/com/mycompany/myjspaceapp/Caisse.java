@@ -13,21 +13,16 @@ public class Caisse implements Runnable {
     }
 
     public void run() {
-        //float somme_payee;
-        //String pompe_choisie;
         String code;
-        Object[] argent, pompe_choisie;
+        Object argent, pompe_choisie;
         try {
             argent = ts.get(new ActualField("somme_paye"), new FormalField(Float.class));
             pompe_choisie = ts.get(new ActualField("pompe_choisie"), new FormalField(String.class));
             CodeGenerator c = CodeGenerator.getInstance();
             code = c.next();
-            ts.put(code, argentToVolumeEssence((float)argent[0]));
+            ts.put(code, argentToVolumeEssence((float)argent));
             ts.put("code_donne", code);
-            ts.put(pompe_choisie,argentToVolumeEssence((float)argent[0]));
-
-
-
+            ts.put(pompe_choisie,argentToVolumeEssence((float)argent));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

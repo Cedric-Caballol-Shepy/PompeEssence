@@ -38,7 +38,7 @@ public class Conducteur implements Runnable {
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
                 Object code_epuise = ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class),
                         new FormalField(String.class));
-                if (!((String) code_epuise).equals("null"))
+                if (code_epuise != null)
                     codes.remove(code_choisi);
                 etat = "rien";
             }
