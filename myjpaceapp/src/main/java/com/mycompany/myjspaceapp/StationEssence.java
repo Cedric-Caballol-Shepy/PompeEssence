@@ -4,21 +4,29 @@ import org.jspace.FormalField;
 import org.jspace.SequentialSpace;
 import org.jspace.Space;
 
+import java.util.ArrayList;
+
 public class StationEssence {
 
     public static void main(String[] argv) throws InterruptedException {
-        Space inbox = new SequentialSpace();
 
-        inbox.put("Hello World!");
-        Object[] tuple = inbox.get(new FormalField(String.class));
-        System.out.println(tuple[0]);
+        Space space = new SequentialSpace();
 
-        /// Test CodeGenerator :
-        CodeGenerator c = CodeGenerator.getInstance();
-        for(int i = 0 ; i < 100 ; i++) {
-            System.out.println("Code random :" + c.next());
-        }
-        ///
+        Thread t1 = new Thread( new Caisse(space) );
+        Thread t2 = new Thread( new Conducteur(space, new ArrayList<String>(), 50, 0, "pompe_gauche",
+                "payerCode", 20) );
+        Thread t3 = new Thread( new RemplisseurPompe("pompe_gauche", 1000, space));
+        Thread t4 = new Thread( new Pompe("pompe_gauche", 1000, space) );
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+
+        t1.join();
+        t2.join();
+        t3.join();
+        t4.join();
 
     }
 
