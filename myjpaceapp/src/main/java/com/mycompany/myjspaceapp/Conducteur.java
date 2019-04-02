@@ -31,21 +31,24 @@ public class Conducteur implements Runnable {
                 System.out.println("Conducteur : envoie l'argent");
                 ts.put("pompe_choisie", pompe_choisie);
                 System.out.println("Conducteur : envoie la pompe choisie");
-                Object code = ts.get(new ActualField("code_donne"), new FormalField(String.class),
+                Object[] code = ts.get(new ActualField("code_donne"), new FormalField(String.class),
                         new FormalField(String.class));
-                System.out.println("Conducteur : recupere la code : " + (String)code);
-                codes.add((String) code);
+                System.out.println("Conducteur : recupere la code : " + (String)code[1]);
+                codes.add((String) code[1]);
                 System.out.println("Conducteur : ajoute le nouveau code dans sa liste de codes");
-                etat = "remplirVoiture";
+                Thread t = new Thread( new Conducteur(ts, codes, 50f, 0, "pompe_gauche",
+                        "remplirVoiture", 20f) );
+                t.start();
+                t.join();
             } else if (!codes.isEmpty() && etat.equals("remplirVoiture")) {
                 ts.put("active_pompe" + pompe_choisie, codes.get(code_choisi));
                 System.out.println("Conducteur : active la pompe");
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
                 System.out.println("Conducteur : remplit la voiture");
-                Object code_epuise = ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class),
+                Object[] code_epuise = ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class),
                         new FormalField(String.class));
                 System.out.println("Conducteur : regarde si le code est epuisé");
-                if (code_epuise != null) {
+                if (code_epuise[1] != null) {
                     codes.remove(code_choisi);
                     System.out.println("Conducteur : supprime le code epuisé");
                 }

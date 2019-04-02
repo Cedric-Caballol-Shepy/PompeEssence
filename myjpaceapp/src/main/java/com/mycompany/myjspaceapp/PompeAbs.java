@@ -4,8 +4,8 @@ import org.jspace.Space;
 
 public abstract class PompeAbs implements Runnable{
     public String id;
-    private float volume_pompe;
-    private Space ts;
+    protected float volume_pompe;
+    protected Space ts;
 
     PompeAbs(String id, float volume_pompe, Space ts){
         this.id = id;

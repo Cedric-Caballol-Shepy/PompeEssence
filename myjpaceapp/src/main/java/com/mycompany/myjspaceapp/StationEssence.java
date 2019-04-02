@@ -13,10 +13,10 @@ public class StationEssence {
         Space space = new SequentialSpace();
 
         Thread t1 = new Thread( new Caisse(space) );
-        Thread t2 = new Thread( new Conducteur(space, new ArrayList<String>(), 50, 0, "pompe_gauche",
-                "payerCode", 20) );
-        Thread t3 = new Thread( new RemplisseurPompe("pompe_gauche", 1000, space));
-        Thread t4 = new Thread( new Pompe("pompe_gauche", 1000, space) );
+        Thread t2 = new Thread( new Conducteur(space, new ArrayList<String>(), 50f, 0, "pompe_gauche",
+                "payerCode", 20f) );
+        Thread t3 = new Thread( new RemplisseurPompe("pompe_gauche", 1000f, space));
+        Thread t4 = new Thread( new Pompe("pompe_gauche", 1000f, space) );
 
         t1.start();
         t2.start();
