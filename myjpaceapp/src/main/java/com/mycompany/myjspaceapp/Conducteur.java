@@ -36,10 +36,11 @@ public class Conducteur implements Runnable {
             } else if (!codes.isEmpty() && etat.equals("remplirVoiture")) {
                 ts.put("active_pompe" + pompe_choisie, codes.get(code_choisi));
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
-                // ( In(ts, <| code_epuise + pompe, string, ? c, string|>).
-                // Conducteur(codes.retire(c), volume_reservoir, i, pompe, rien)
-                // +
-                // Conducteur(codes, 0, i, pompe, rien) )
+                Object code_epuise = ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class),
+                        new FormalField(String.class));
+                if (!((String) code_epuise).equals("null"))
+                    codes.remove(code_choisi);
+                etat = "rien";
             }
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
