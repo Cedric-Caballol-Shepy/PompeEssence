@@ -4,5 +4,4 @@ myjpaceapp/.project
 myjpaceapp/.settings/
 myjpaceapp/target/
 *.iml
-Pompe/target
-commandes.txt
+*.class

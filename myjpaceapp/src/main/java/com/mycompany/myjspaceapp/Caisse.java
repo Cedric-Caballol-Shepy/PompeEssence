@@ -1,4 +1,3 @@
-
 package com.mycompany.myjspaceapp;
 
 import org.jspace.ActualField;
@@ -17,14 +16,15 @@ public class Caisse implements Runnable {
         //float somme_payee;
         //String pompe_choisie;
         String code;
-        Object[] somme_payee, pompe_choisie;
+        Object[] argent, pompe_choisie;
         try {
-            somme_payee = ts.get(new ActualField("somme_paye"), new FormalField(Float.class));
+            argent = ts.get(new ActualField("somme_paye"), new FormalField(Float.class));
             pompe_choisie = ts.get(new ActualField("pompe_choisie"), new FormalField(String.class));
-            //TODO : code_donne = random code (faire une fonction)
+            CodeGenerator c = CodeGenerator.getInstance();
+            code = c.next();
+            ts.put(code, argentToVolumeEssence((float)argent[0]));
             ts.put("code_donne", code);
-            ts.put(code, argentToVolumeEssence((float)somme_payee));
-            ts.put("pompe",pompe_choisie);
+            ts.put(pompe_choisie,argentToVolumeEssence((float)argent[0]));
 
 
 
@@ -33,7 +33,7 @@ public class Caisse implements Runnable {
         }
     }
 
-    public float argentToVolumeEssence(float argent){
+    private float argentToVolumeEssence(float argent){
         return argent/1.5f;
     }
 }

@@ -3,7 +3,7 @@ package com.mycompany.myjspaceapp;
 import java.util.Random;
 
 public class CodeGenerator {
-    private int n; //utilisé pour avoir un seed différent pour chaque code
+    private int n; //utilisé pour avoir un préfixe différent pour chaque code (au cas où)
 
     private CodeGenerator(){}
 
@@ -21,7 +21,7 @@ public class CodeGenerator {
     public String next(){
         this.n++;
         Random rand = new Random();
-        int x = rand.nextInt(999999);
+        int x = rand.nextInt(999999); // double check (si jamais deux codes arrivent à avoir le même n)
         return n + "c" + x; //comme ça on est sûr de ne pas avoir 2 fois le même code...
     }
 }
