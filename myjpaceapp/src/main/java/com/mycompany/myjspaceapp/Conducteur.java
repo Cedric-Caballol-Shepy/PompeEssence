@@ -31,13 +31,12 @@ public class Conducteur implements Runnable {
                 System.out.println("Conducteur : envoie l'argent");
                 ts.put("pompe_choisie", pompe_choisie);
                 System.out.println("Conducteur : envoie la pompe choisie");
-                Object[] code = ts.get(new ActualField("code_donne"), new FormalField(String.class),
-                        new FormalField(String.class));
-                System.out.println("Conducteur : recupere la code : " + (String)code[1]);
-                codes.add((String) code[1]);
+                String code = (String) ts.get(new ActualField("code_donne"), new FormalField(String.class))[1];
+                System.out.println("Conducteur : recupere la code : " + code);
+                codes.add(code);
                 System.out.println("Conducteur : ajoute le nouveau code dans sa liste de codes");
-                Thread t = new Thread( new Conducteur(ts, codes, 50f, 0, "pompe_gauche",
-                        "remplirVoiture", 20f) );
+                Thread t = new Thread( new Conducteur(ts, codes, volume_reservoir, code_choisi, pompe_choisie,
+                        "remplirVoiture", somme_argent) );
                 t.start();
                 t.join();
             } else if (!codes.isEmpty() && etat.equals("remplirVoiture")) {
@@ -45,11 +44,10 @@ public class Conducteur implements Runnable {
                 System.out.println("Conducteur : active la pompe");
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
                 System.out.println("Conducteur : remplit la voiture");
-                Object[] code_epuise = ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class),
-                        new FormalField(String.class));
+                String code_epuise = (String) ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class))[1];
                 System.out.println("Conducteur : regarde si le code est epuisé");
-                if (code_epuise[1] != null) {
-                    codes.remove(code_choisi);
+                if (!code_epuise.equals("null")) {
+                    codes.remove(code_epuise);
                     System.out.println("Conducteur : supprime le code epuisé");
                 }
                 etat = "rien";
