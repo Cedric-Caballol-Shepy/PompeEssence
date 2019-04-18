@@ -40,6 +40,13 @@ public class Pompe extends PompeAbs{
             }
             else{
                 // volume_pompe < volume_reservoir
+                ts.put("active_pompe"+id,code);
+                ts.put(code, volume_code);
+                ts.put("remplir_voiture"+id,volume_reservoir);
+                ts.put("volume_pompe"+id, volume_pompe);
+                System.out.println("Pompe : Pas assez d'essence dans la pompe " + id + "... La pompe attend un nouveau plein");
+                ts.query(new ActualField(id), new FormalField(Float.class));
+                //on bloque jusqu'à-ce ce que RemplisseurPompe ait réussi à lire un ordre de plein + le temps de remplir la pompe
                 run();
             }
 

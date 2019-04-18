@@ -1,6 +1,8 @@
 package com.mycompany.myjspaceapp;
 
-import org.jspace.*;
+import org.jspace.ActualField;
+import org.jspace.FormalField;
+import org.jspace.Space;
 import java.util.ArrayList;
 
 public class Conducteur implements Runnable {
