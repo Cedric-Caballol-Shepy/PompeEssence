@@ -45,10 +45,13 @@ public class Conducteur implements Runnable {
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
                 System.out.println("Conducteur : remplit la voiture");
                 String code_epuise = (String) ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class))[1];
-                System.out.println("Conducteur : regarde si le code est epuisé");
+                System.out.println("Conducteur : regarde si le code est epuise");
                 if (!code_epuise.equals("null")) {
                     codes.remove(code_epuise);
-                    System.out.println("Conducteur : supprime le code epuisé");
+                    System.out.println("Conducteur : le code est epuise, supprime le code epuise");
+                }
+                else{
+                    System.out.println("Conducteur : le code n'est pas epuise");
                 }
                 etat = "rien";
             }

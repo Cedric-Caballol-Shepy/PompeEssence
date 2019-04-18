@@ -20,7 +20,7 @@ public class Pompe extends PompeAbs{
             System.out.println("Pompe : recupere le volume du code : " + volume_code);
             float volume_reservoir = (float) ts.get(new ActualField("remplir_voiture"+id), new FormalField(Float.class))[1];
             System.out.println("Pompe : recupere le volume du reservoir de la voiture : " + volume_reservoir);
-            float volume_pompe = (float) ts.get(new ActualField("volume_pompe"), new FormalField(Float.class))[1];
+            float volume_pompe = (float) ts.get(new ActualField("volume_pompe"+id), new FormalField(Float.class))[1];
             System.out.println("Pompe : Volume d'essence dans la pompe = " + volume_pompe);
             if(volume_pompe > volume_reservoir && volume_code - volume_reservoir > 0){
                 ts.put(code, volume_code-volume_reservoir);
@@ -28,18 +28,19 @@ public class Pompe extends PompeAbs{
                 ts.put("code_epuise"+id, "null");
                 System.out.println("Pompe : indique que le code n'est pas epuisé");
                 volume_pompe -= volume_code;
-                ts.put("volume_pompe", volume_pompe);
+                ts.put("volume_pompe"+id, volume_pompe);
                 System.out.println("Pompe : deduit le volume du code au volume de la pompe {volume_pompe = "+ volume_pompe +"}");
             }
             else if(volume_pompe > volume_reservoir && volume_code - volume_reservoir <= 0){
                 ts.put("code_epuise"+id, code);
                 System.out.println("Pompe : indique que le code est epuisé");
                 volume_pompe -= volume_code;
-                ts.put("volume_pompe", volume_pompe);
+                ts.put("volume_pompe"+id, volume_pompe);
                 System.out.println("Pompe : deduit le volume du code au volume de la pompe {volume_pompe = "+ volume_pompe +"}");
             }
             else{
                 // volume_pompe < volume_reservoir
+                run();
             }
 
         } catch (InterruptedException e) {

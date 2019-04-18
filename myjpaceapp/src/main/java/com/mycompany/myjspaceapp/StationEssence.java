@@ -9,12 +9,13 @@ public class StationEssence {
 
     public static void main(String[] argv) throws InterruptedException {
         Space ts = new SequentialSpace();
-        ts.put("volume_pompe",1000f);
+        String idPompe = "pompe_gauche";
+        ts.put("volume_pompe"+idPompe,0f); //pour que ça fonctionne il faut obligatoirement initialiser ce tuple
         Thread t1 = new Thread( new Caisse(ts) );
-        Thread t2 = new Thread( new Conducteur(ts, new ArrayList<String>(), 10f, 0, "pompe_gauche",
+        Thread t2 = new Thread( new Conducteur(ts, new ArrayList<String>(), 10f, 0, idPompe,
                 "payerCode", 20f) );
-        Thread t3 = new Thread( new RemplisseurPompe("pompe_gauche", ts));
-        Thread t4 = new Thread( new Pompe("pompe_gauche", ts) );
+        Thread t3 = new Thread( new RemplisseurPompe(idPompe, ts));
+        Thread t4 = new Thread( new Pompe(idPompe, ts) );
 
         t1.start();
         t3.start();

@@ -16,9 +16,9 @@ public class RemplisseurPompe extends PompeAbs{
             float volume_essence = (float) ts.get(new ActualField(id), new FormalField(Float.class))[1];
             System.out.println("RemplisseurPompe : recupere le volume d'essence : " + volume_essence);
 
-            float old_volume_pompe = (float) ts.get(new ActualField("volume_pompe"), new FormalField(Float.class))[1];
+            float old_volume_pompe = (float) ts.get(new ActualField("volume_pompe"+id), new FormalField(Float.class))[1];
             float volume_pompe = old_volume_pompe + volume_essence;
-            ts.put("volume_pompe",volume_pompe);
+            ts.put("volume_pompe"+id,volume_pompe);
             System.out.println("RemplisseurPompe : la pompe s'est remplie");
         } catch (InterruptedException e) {
             e.printStackTrace();
