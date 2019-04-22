@@ -34,6 +34,7 @@ public class Caisse implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        run();
     }
 
     private float argentToVolumeEssence(float argent){

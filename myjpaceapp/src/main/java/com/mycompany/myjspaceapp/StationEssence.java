@@ -35,8 +35,11 @@ public class StationEssence {
         Thread conducteur1 = new Thread( new Conducteur(ts, "Conducteur1", new ArrayList<String>(), 10f, 0, pompe_gauche,
                 "payerCode", 20f) );
 
-        /*Thread conducteur2 = new Thread( new Conducteur(ts, "Conducteur2", new ArrayList<String>(), 20f, 0, pompe_centre,
-                "payerCode", 10f) );*/
+        Thread conducteur2 = new Thread( new Conducteur(ts, "Conducteur2", new ArrayList<String>(), 20f, 0, pompe_centre,
+                "payerCode", 10f) );
+
+        Thread conducteur3 = new Thread( new Conducteur(ts, "Conducteur3", new ArrayList<String>(), 60f, 0, pompe_droite,
+                "payerCode", 100f) );
 
         // Lancement des agents
         caisse.start();
@@ -47,7 +50,8 @@ public class StationEssence {
         remplisseurPompeDroite.start();
         pompeDroite.start();
         conducteur1.start();
-        //conducteur2.start();
+        conducteur2.start();
+        conducteur3.start();
 
         caisse.join();
         remplisseurPompeGauche.join();
@@ -57,7 +61,8 @@ public class StationEssence {
         remplisseurPompeDroite.join();
         pompeDroite.join();
         conducteur1.join();
-        //conducteur2.join();
+        conducteur2.join();
+        conducteur3.join();
     }
 
 }

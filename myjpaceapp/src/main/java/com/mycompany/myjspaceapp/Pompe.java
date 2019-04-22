@@ -54,7 +54,7 @@ public class Pompe extends PompeAbs{
                 System.out.println(id + " : Pas assez d'essence dans la pompe " + id + "... La pompe attend un nouveau plein");
 
                 ts.query(new ActualField(id), new FormalField(Float.class));
-                //on bloque jusqu'à-ce ce que RemplisseurPompe ait réussi à lire un ordre de plein + le temps de remplir la pompe
+                //on bloque jusqu'à-ce ce que RemplisseurPompe ait réussi à lire un ordre de plein
                 run();
             }
 
