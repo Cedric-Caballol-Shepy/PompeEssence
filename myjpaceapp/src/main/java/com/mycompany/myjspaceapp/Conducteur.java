@@ -33,12 +33,16 @@ public class Conducteur implements Runnable {
             if (etat.equals("payerCode")) {
                 ts.put("somme_paye", somme_argent);
                 System.out.println(name + " : envoie l'argent");
+
                 ts.put("pompe_choisie", pompe_choisie);
                 System.out.println(name + " : envoie la pompe choisie");
+
                 String code = (String) ts.get(new ActualField("code_donne"), new FormalField(String.class))[1];
                 System.out.println(name + " : recupere la code : " + code);
+
                 codes.add(code);
                 System.out.println(name + " : ajoute le nouveau code dans sa liste de codes");
+
                 Thread t = new Thread( new Conducteur(ts, name, codes, volume_reservoir, code_choisi, pompe_choisie,
                         "remplirVoiture", somme_argent) );
                 t.start();
@@ -46,10 +50,13 @@ public class Conducteur implements Runnable {
             } else if (!codes.isEmpty() && etat.equals("remplirVoiture")) {
                 ts.put("active_pompe" + pompe_choisie, codes.get(code_choisi));
                 System.out.println(name + " : active la pompe");
+
                 ts.put("remplir_voiture" + pompe_choisie, volume_reservoir);
                 System.out.println(name + " : remplit la voiture");
+
                 String code_epuise = (String) ts.get(new ActualField("code_epuise" + pompe_choisie), new FormalField(String.class))[1];
                 System.out.println(name + " : regarde si le code est epuise");
+                
                 if (!code_epuise.equals("null")) {
                     codes.remove(code_epuise);
                     System.out.println(name + " : le code est epuise, supprime le code epuise");
